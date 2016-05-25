@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"mwjames"
+		]
+	},
+	"suc-desc": "Creates hoverable content summaries on embedded pagelinks",
+	"suc-tooltip-title": "Hovercard",
+	"prefs-suc-options": "Summary Cards options",
+	"suc-tooltip-disabled": "Do not show summary card on content links"
+}

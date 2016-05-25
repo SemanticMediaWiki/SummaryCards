@@ -1,0 +1,15 @@
+/*!
+ * @since 1.0
+ * @licence GNU GPL v2+
+ *
+ * @author mwjames
+ */
+.suc-tooltip-loading {
+	padding-left: 45%;
+	padding-top: 15%;
+}
+
+.suc-tooltip {
+	min-width: 250px;
+	min-height: 100px;
+}

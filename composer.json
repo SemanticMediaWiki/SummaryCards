@@ -1,0 +1,51 @@
+{
+	"name": "mediawiki/summary-cards",
+	"type": "mediawiki-extension",
+	"description": "Display content summaries with the help of templates and #ask queries as hovercards.",
+	"keywords": [
+		"semantic mediawiki",
+		"wiki",
+		"mediawiki"
+	],
+	"homepage": "https://semantic-mediawiki.org/wiki/Extension:SummaryCards",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "mwjames",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "semediawiki-user@lists.sourceforge.net",
+		"issues": "https://github.com/SemanticMediaWiki/SummaryCards/issues",
+		"irc": "irc://irc.freenode.net/semantic-mediawiki",
+		"forum": "https://semantic-mediawiki.org/wiki/semantic-mediawiki.org_talk:Community_portal",
+		"wiki": "https://semantic-mediawiki.org/wiki/Extension:SummaryCards",
+		"source": "https://github.com/SemanticMediaWiki/SummaryCards"
+	},
+	"require": {
+		"php": ">=5.5.0",
+		"composer/installers": "^1.0.12",
+		"onoi/blob-store": "~1.2",
+		"onoi/shared-resources": "~0.2"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.x-dev"
+		}
+	},
+	"autoload": {
+		"files" : [
+			"SummaryCards.php"
+		],
+		"psr-4": {
+			"SUC\\": "src/"
+		}
+	},
+	"config": {
+		"process-timeout": 0
+	},
+	"scripts":{
+		"phpunit": "php ../../tests/phpunit/phpunit.php -c phpunit.xml.dist"
+	}
+}
