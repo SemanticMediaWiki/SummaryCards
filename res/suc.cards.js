@@ -111,6 +111,11 @@
 			grandparentClass = context.parent().parent().attr( 'class' ),
 			previousClass = context.parent().prev().attr( 'class' );
 
+		// SBL
+		if ( parentClass !== undefined && parentClass.indexOf( 'sbl-breadcrumb' ) > -1 ) {
+			return false;
+		}
+
 		if ( grandparentClass !== undefined && grandparentClass.indexOf( 'smw-highlighter' ) > -1 ) {
 			return false;
 		}
@@ -283,7 +288,14 @@
 				self.blobstore.set( hash, text, self.ttl );
 			}
 		} ).fail ( function( xhr, status, error ) {
-			QTip.set( 'content.text', status + ': ' + error );
+
+			var error = 'Unknown API error';
+
+			if ( status.hasOwnProperty( 'error' ) ) {
+				error = status.error.code + ': ' + status.error.info
+			};
+
+			QTip.set( 'content.text', error );
 		} );
 	};
 
