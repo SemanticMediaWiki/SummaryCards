@@ -19,7 +19,7 @@ use Title;
  *
  * On the event that a template that was used for generating content  was modified
  * then a re-parse of the content is requested the next time instead of a cache
- * retrievable.
+ * retrieval.
  *
  * @license GNU GPL v2+
  * @since 1.0
