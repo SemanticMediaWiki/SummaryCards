@@ -101,6 +101,11 @@
 			return false;
 		};
 
+		// Special:Version
+		if ( cls !== undefined && cls.indexOf( 'external' ) > -1 ) {
+			return false;
+		};
+
 		// Simple traversal filtering
 		var parentClass = context.parent().attr( 'class' ),
 			grandparentClass = context.parent().parent().attr( 'class' ),

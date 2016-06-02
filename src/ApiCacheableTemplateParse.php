@@ -66,10 +66,10 @@ class ApiCacheableTemplateParse extends ApiBase {
 
 	public function getAllowedParams() {
 		return array(
-			'text'         => array( ApiBase::PARAM_TYPE => 'text' ),
-			'template'     => array( ApiBase::PARAM_TYPE => 'text' ),
-			'title'        => array( ApiBase::PARAM_TYPE => 'text' ),
-			'userlanguage' => array( ApiBase::PARAM_TYPE => 'text' )
+			'text'         => array( ApiBase::PARAM_TYPE => 'string' ),
+			'template'     => array( ApiBase::PARAM_TYPE => 'string' ),
+			'title'        => array( ApiBase::PARAM_TYPE => 'string' ),
+			'userlanguage' => array( ApiBase::PARAM_TYPE => 'string' )
 		);
 	}
 
