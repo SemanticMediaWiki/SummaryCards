@@ -34,8 +34,10 @@ call_user_func( function () {
 	// Register the extension
 	$GLOBALS['wgExtensionCredits']['others'][ ] = array(
 		'path'           => __DIR__,
-		'name'           => 'Summary Hovercards',
-		'author'         => array( 'mwjames' ),
+		'name'           => 'Summary Cards',
+		'author'         => array(
+			'James Hong Kong'
+			),
 		'url'            => 'https://github.com/SemanticMediaWiki/SummaryCards/',
 		'descriptionmsg' => 'suc-desc',
 		'version'        => SUC_VERSION,
