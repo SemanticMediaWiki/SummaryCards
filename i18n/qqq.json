@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kghbln",
 			"mwjames"
 		]
 	},
-	"suc-desc": "{{desc|name=Summary Cards|url=https://www.semantic-mediawiki.org/wiki/Extension:SummaryCards}}"
+	"suc-desc": "{{desc|name=Summary Cards|url=https://www.semantic-mediawiki.org/wiki/Extension:SummaryCards}}",
+	"suc-tooltip-title": "This is the title of the \"tooltip\" containing information about a link which is showing up when hovering over a link. See this [[:File:Suc-tooltip-title.png|example]].",
+	"prefs-suc-options": "This is the title of the section header on \"Special:Preferences\" in section \"Appearance\". See this [[:File:Suc-option.png|example]].",
+	"suc-tooltip-disabled": "This is the description of the user preference shown on \"Special:Preferences\" in section \"Appearance\". See this [[:File:Suc-option.png|example]]."
 }
