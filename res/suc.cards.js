@@ -179,7 +179,10 @@
 	 */
 	suc.prototype.getNormalizedLink = function( href ) {
 
-		if ( href === undefined ) {
+		// If the articlePath could not be found as part of the href then we
+		// expect it to be an external or interwiki link and is therefore
+		// disqualified by default
+		if ( href === undefined || href.indexOf( this.articlePath ) < 0 ) {
 			return '';
 		};
 

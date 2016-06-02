@@ -62,8 +62,17 @@ $GLOBALS['sucgEnabledNamespaceWithTemplate'] = array(
 );
 ```
 
+When using `SMW_NS_PROPERTY`, settings should be added after the `enableSemantics`
+to ensure the NS is registered.
+
 The [template][temp] document contains some simple examples on how to create dynamic
 content summaries.
+
+### Links
+
+Summary Cards tries is best to only allow legitimate links (external as well as
+interwiki links are generally disabled) to display cards, yet it can happen that
+to rule set has missed a certain link type.
 
 ### Cache
 
