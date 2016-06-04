@@ -129,8 +129,9 @@ class ApiCacheableTemplateParse extends ApiBase {
 			$untouchedTemplate = $container->get( $templateKey ) == $templateTouched;
 		}
 
-		// Split by lang and fragment as separate container, cache is stored on
-		// a per subject basis allowing all relateed containers to evict at once
+		// Split by lang and fragment into separate containers, while the cache
+		// is stored on a per subject basis allowing all related containers to
+		// be purged at once
 		$key = 'L#' . $params['userlanguage'] . '#' . ( $title !== null ? $title->getFragment() : '' );
 
 		if ( $untouchedTemplate && $hash !== '' && $container->has( $key ) ) {
@@ -147,8 +148,7 @@ class ApiCacheableTemplateParse extends ApiBase {
 			)
 		);
 
-		// Only cache where template is known is it is more traceable
-		// and trackable then simple free text
+		// Only cache when a template is known
 		if ( $hash !== '' && $templateKey !== '' ) {
 			$container->set( $key, $data );
 			$container->set( $templateKey, $templateTouched );
@@ -160,16 +160,16 @@ class ApiCacheableTemplateParse extends ApiBase {
 
 	private function getTemplateFrom( $params ) {
 
-		$template = '';
+		$templateKey = '';
 		$templateTouched = 0;
 
 		if ( isset( $params['template'] ) ) {
 			$template = Title::makeTitleSafe( NS_TEMPLATE, $params['template'] );
 			$templateTouched = $template->getTouched();
-			$template = 'T#' . $params['template'] . '#' . $params['userlanguage'];
+			$templateKey = 'T#' . $params['template'] . '#' . $params['userlanguage'];
 		}
 
-		return array( $template, $templateTouched );
+		return array( $templateKey, $templateTouched );
 	}
 
 	private function doParse( $title, $userLanguage, $text ) {

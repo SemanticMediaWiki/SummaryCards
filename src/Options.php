@@ -34,7 +34,7 @@ class Options {
 			'tooltipRequestCacheTTL'       => $GLOBALS['sucgTooltipRequestCacheLifetime'],
 			'cachePrefix'                  => $GLOBALS['sucgCachePrefix'],
 			'enabledNamespaceWithTemplate' => $GLOBALS['sucgEnabledNamespaceWithTemplate'],
-			'enabledForAnonUsers'          => $GLOBALS['sucgAnonUserEnabled'],
+			'enabledForAnonUsers'          => $GLOBALS['sucgEnabledForAnonUser'],
 			'backendParserCacheLifetime'   => $GLOBALS['sucgBackendParserCacheLifetime'],
 			'backendParserCacheType'       => $GLOBALS['sucgBackendParserCacheType']
 		);

@@ -143,6 +143,8 @@ class HookRegistry {
 				$enabledNamespaceWithTemplate[$contentLanguage->getNsText( $ns )] = $template;
 			}
 
+			// Get literals to match and split when comparing href's during the
+			// JS parse process
 			foreach ( \MWNamespace::getCanonicalNamespaces() as $ns => $name ) {
 				$namespacesByContentLanguage[$contentLanguage->getNsText( $ns )] = $name;
 			}

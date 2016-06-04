@@ -61,6 +61,12 @@
 	}
 
 	/**
+	 * Whether a link is legitimate for displaying a summary card or not.
+	 *
+	 * The listed rule-sets have been gather while observing a wiki, so it is
+	 * possible that certain links are not yet correctly categorized as
+	 * illegitimate.
+	 *
 	 * @since  1.0
 	 * @method
 	 *
@@ -91,17 +97,15 @@
 		};
 
 		result = link !== '' &&
-			cls !== 'external' && // External url
-			cls !== 'external text' && // External url
-			cls !== 'external free' && // External url
 			cls !== 'image' &&
+			cls !== 'extiw' && // interwiki
 			cls !== 'new'; // redlinks
 
 		if ( result === false ) {
 			return false;
 		};
 
-		// Special:Version
+		// External urls in various shades
 		if ( cls !== undefined && cls.indexOf( 'external' ) > -1 ) {
 			return false;
 		};

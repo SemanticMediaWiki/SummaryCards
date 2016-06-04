@@ -10,10 +10,11 @@
 Summary Cards (a.k.a SUC) is a simple extension for displaying content summaries on
 hovered links.
 
-Content summaries are created using templates matched to a linked subject and will
-be requested via [Ajax][ajax] to improve display responsiveness.
+The content of a Summary Card on a hovered link is created by a template that is
+assigned to the namespace the link belongs and requested via [Ajax][ajax] to improve
+display responsiveness.
 
-Summary Cards does not require [Semantic MediaWiki][smw] but it is highly recommended to
+The extension does not require [Semantic MediaWiki][smw] but it is highly recommended to
 use them together in order for summaries to generate individual content (e.g. property
 that contains short description, image property, known keywords, modification date etc.)
 while building a summary.
@@ -42,12 +43,15 @@ an entry in MediaWiki's `composer.json`.
 
 ## Usage
 
-![image](https://cloud.githubusercontent.com/assets/1245473/15326382/17cb29f6-1c4e-11e6-9e22-66cdc20864af.png)
+![image](https://cloud.githubusercontent.com/assets/1245473/15775040/0033ad4c-2980-11e6-9514-007afc0ed630.png)
 
 Logged-in users can individually decide whether or not to display a summary card while
-settings `$GLOBALS['sucgAnonUserEnabled']` for annon users need to be enabled.
+the setting `$GLOBALS['sucgEnabledForAnonUser']` is provided to disable Summary Cards
+for anon users globally.
 
-### Templates
+The setting for a user can be found under `Preference -> Appearance`.
+
+### Templates and content summaries
 
 Summaries are enabled on a per namespace basis by assigning a template that specifies
 the expected content.
@@ -62,17 +66,20 @@ $GLOBALS['sucgEnabledNamespaceWithTemplate'] = array(
 );
 ```
 
-When using `SMW_NS_PROPERTY`, settings should be added after the `enableSemantics`
-to ensure the NS is registered.
+If the setting includes reference to `SMW_NS_PROPERTY` then it should be added after
+the `enableSemantics` in order for namespaces to be registered appropriately.
 
 The [template][temp] document contains some simple examples on how to create dynamic
 content summaries.
 
 ### Links
 
-Summary Cards tries is best to only allow legitimate links (external as well as
-interwiki links are generally disabled) to display cards, yet it can happen that
-to rule set has missed a certain link type.
+Summary Cards uses some ruleset to match only legitimate links (external as well as
+interwiki links are generally disabled) for preparing a summary display, yet it
+can happen that the set has missed a certain link type and if possible needs adjustment.
+
+Summary cards on the `SMW_NS_PROPERTY` namespace are only displayed when no
+other highlighter (e.g. from SMW core) is available to avoid competing tooltips.
 
 ### Cache
 

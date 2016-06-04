@@ -105,7 +105,7 @@ call_user_func( function () {
 	/**
 	 * Whether anon users are able to see summary cards or not.
 	 */
-	$GLOBALS['sucgAnonUserEnabled'] = true;
+	$GLOBALS['sucgEnabledForAnonUser'] = true;
 
 	/**
 	 * Setting to regulate the local client caching of responses received from
@@ -116,14 +116,13 @@ call_user_func( function () {
 	$GLOBALS['sucgTooltipRequestCacheLifetime'] = 60 * 30;
 
 	/**
-	 * A cache used to serve already parsed result from a cache layer without
-	 * requiring to parse a template again. This allows to serve all users that
-	 * request data for the same subject from a central cache which is independent
-	 * from a browser (sucgTooltipRequestCacheTTLInSeconds is to manage a local
-	 * cache on a per browser basis)
+	 * This cache is to serve already parsed result from a cache layer without
+	 * requiring to parse a template and itscontent again. It allows to serve
+	 * all users that request data for the same subject from a central cache
+	 * which is independent from a browser (see sucgTooltipRequestCacheLifetime).
 	 *
-	 * Changes in a template or alteration of a subject are detected and will
-	 * request a new parse of data before retrievng them from cache.
+	 * Changes to a template or alteration of a subject will trigger a new parse
+	 * of content before retrievng them from cache.
 	 *
 	 * @default: 24 h, CACHE_NONE to disable the cache
 	 */

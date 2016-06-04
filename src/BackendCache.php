@@ -97,7 +97,7 @@ class BackendCache {
 
 		$enabledNamespaceWithTemplate = $this->options->get( 'enabledNamespaceWithTemplate' );
 
-		if ( !isset( $enabledNamespaceWithTemplate[$title->getNamespace()] ) || $title === null ) {
+		if ( $title === null || !isset( $enabledNamespaceWithTemplate[$title->getNamespace()] ) ) {
 			return '';
 		}
 
@@ -120,11 +120,7 @@ class BackendCache {
 
 		$title = Title::newFromText( $title );
 
-		if ( $title === null ) {
-			return $title;
-		}
-
-		if ( $title->hasFragment() ) {
+		if ( $title === null || $title->hasFragment() ) {
 			return $title;
 		}
 
