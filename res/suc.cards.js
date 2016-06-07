@@ -258,6 +258,7 @@
 			if ( self.ttl == 0 || value === null ) {
 				self.parse( hash, template, text, subject, QTip );
 			} else {
+				QTip.set( 'content.title', mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-browser"></span>' );
 				QTip.set( 'content.text', value );
 			}
 		} );
@@ -289,6 +290,10 @@
 			// var text = data.ctparse.text['*'].replace(/<!--[\S\s]*?-->/gm, '' );
 			var text = data.ctparse.text.replace(/<!--[\S\s]*?-->/gm, '' );
 
+			if ( data.ctparse.time.cached !== undefined ) {
+				QTip.set( 'content.title', mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-backend"></span>' );
+			};
+
 			QTip.set( 'content.text', text );
 
 			if ( self.ttl > 0 ) {
@@ -302,6 +307,7 @@
 				error = status.error.code + ': ' + status.error.info
 			};
 
+			QTip.set( 'content.title', mw.msg( 'suc-tooltip-error' ) );
 			QTip.set( 'content.text', error );
 		} );
 	};

@@ -6,6 +6,7 @@
 	},
 	"suc-desc": "Creates hoverable content summaries on embedded pagelinks",
 	"suc-tooltip-title": "Summary Card",
+	"suc-tooltip-error": "Error",
 	"prefs-suc-options": "Summary Cards options",
-	"suc-tooltip-disabled": "Do not show summary cards on content links"
+	"suc-tooltip-disabled": "Do not show Summary Cards on content links"
 }

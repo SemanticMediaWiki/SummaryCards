@@ -88,7 +88,8 @@ call_user_func( function () {
 			'ext.summary.cards.tooltip',
 		),
 		'messages' => array(
-			'suc-tooltip-title'
+			'suc-tooltip-title',
+			'suc-tooltip-error'
 		),
 		'targets' => array(
 			'mobile',

@@ -13,3 +13,15 @@
 	min-width: 250px;
 	min-height: 100px;
 }
+
+.suc-tooltip-cache-indicator {
+	float: right;
+}
+
+.suc-tooltip-cache-browser::after {
+	content:"◐"; /* &#9680; */
+}
+
+.suc-tooltip-cache-backend::after {
+	content:"◑"; /* &#9681; */
+}
