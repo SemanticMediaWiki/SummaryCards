@@ -92,7 +92,10 @@
 		};
 
 		// Image archive links (what a mess but there is no class to check against)
-		if ( link.indexOf( 'images/archive' ) > -1 || link.indexOf( 'commons/archive' ) > -1 ) {
+		if (
+			link.indexOf( 'images/archive' ) > -1 ||
+			link.indexOf( 'commons/archive' ) > -1 ||
+			link.indexOf( 'commons.wikimedia.org' ) > -1 ) {
 			return false;
 		};
 
@@ -149,7 +152,7 @@
 		};
 
 		// No template, no card
-		if ( self.getTemplate( namespace ) === null ) {
+		if ( self.getTemplateNameFrom( namespace ) === null ) {
 			return false;
 		};
 
@@ -183,10 +186,19 @@
 	 */
 	suc.prototype.getNormalizedLink = function( href ) {
 
+		if ( href === undefined ) {
+			return '';
+		};
+
+		// Need to handle "redirect" before matching the articlePath
+		if ( href.indexOf( '&redirect=no' ) > -1 ) {
+			return href.substring( href.indexOf( "=" ) + 1, href.lastIndexOf( "&" ) );
+		};
+
 		// If the articlePath could not be found as part of the href then we
 		// expect it to be an external or interwiki link and is therefore
 		// disqualified by default
-		if ( href === undefined || href.indexOf( this.articlePath ) < 0 ) {
+		if ( href.indexOf( this.articlePath ) < 0 ) {
 			return '';
 		};
 
@@ -217,7 +229,7 @@
 	 *
 	 * @return {string}
 	 */
-	suc.prototype.getTemplate = function( namespace ) {
+	suc.prototype.getTemplateNameFrom = function( namespace ) {
 
 		if ( this.enabledNamespaceWithTemplate.hasOwnProperty( namespace ) ) {
 			return this.enabledNamespaceWithTemplate[namespace]
@@ -233,13 +245,13 @@
 	 * @param {string} subject
 	 * @param {Object} QTip
 	 */
-	suc.prototype.getContentFor = function( subject, QTip ) {
+	suc.prototype.setContentsTo = function( subject, QTip ) {
 
 		subject = subject.replace( "-20", " " ).replace(/_/g, " " );
 
 		var self = this,
 			namespace = self.getNamespaceFrom( subject ),
-			template = self.getTemplate( namespace );
+			template = self.getTemplateNameFrom( namespace );
 
 		var text = '{{'  + template +
 			'|subject='    + subject +
@@ -336,7 +348,7 @@
 			content: {
 				title :  mw.msg( 'suc-tooltip-title' ),
 				text  : function( event, QTip ) {
-					self.getContentFor( link, QTip );
+					self.setContentsTo( link, QTip );
 
 					// Show a loading image while waiting on the request result
 					return self.util.getBase64LoadingImg( 'suc-tooltip' );

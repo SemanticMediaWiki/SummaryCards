@@ -48,7 +48,7 @@ call_user_func( function () {
 	$GLOBALS['wgMessagesDirs']['summary-cards'] = __DIR__ . '/i18n';
 
 	$GLOBALS['wgResourceModules']['ext.summary.cards.styles'] = array(
-		'styles'  => 'res/suc.styles.css',
+		'styles'  => 'res/ext.suc.styles.css',
 		'localBasePath' => __DIR__ ,
 		'remoteExtPath' => 'SummaryCards',
 		'position' => 'top',
@@ -76,7 +76,7 @@ call_user_func( function () {
 
 	$GLOBALS['wgResourceModules']['ext.summary.cards'] = array(
 		'scripts' => array(
-			'res/suc.cards.js'
+			'res/ext.suc.cards.js'
 		),
 		'localBasePath' => __DIR__ ,
 		'remoteExtPath' => 'SummaryCards',
