@@ -351,7 +351,7 @@
 					self.setContentsTo( link, QTip );
 
 					// Show a loading image while waiting on the request result
-					return self.util.getBase64LoadingImg( 'suc-tooltip' );
+					return self.util.getLoadingImg( 'suc-tooltip', 'dots' );
 				}
 			},
 			position: {

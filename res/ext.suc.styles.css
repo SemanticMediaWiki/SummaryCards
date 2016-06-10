@@ -4,14 +4,12 @@
  *
  * @author mwjames
  */
-.suc-tooltip-loading {
-	padding-left: 45%;
-	padding-top: 15%;
-}
-
 .suc-tooltip {
 	min-width: 250px;
 	min-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .suc-tooltip-cache-indicator {
