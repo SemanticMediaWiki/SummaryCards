@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kghbln",
+			"Metalhead64"
+		]
+	},
+	"suc-desc": "Ermöglicht die Anzeige von Inhaltszusammenfassungen zu Links",
+	"suc-tooltip-title": "Inhaltszusammenfassung",
+	"suc-tooltip-error": "Fehler",
+	"prefs-suc-options": "Inhaltszusammenfassungen zu Links",
+	"suc-tooltip-disabled": "Keine Inhaltszusammenfassungen zu Links anzeigen"
+}

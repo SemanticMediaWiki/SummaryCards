@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko",
+			"Wladek92"
+		]
+	},
+	"suc-desc": "Crée des résumés des liens qui apparaissent lorsqu'on les survole avec la souris.",
+	"suc-tooltip-title": "Fiche de synthèse",
+	"suc-tooltip-error": "Erreur",
+	"prefs-suc-options": "Options des fiches de synthèse",
+	"suc-tooltip-disabled": "Ne pas montrer les Fiches de synthèse sur les liens de contenu"
+}

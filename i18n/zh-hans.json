@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226"
+		]
+	},
+	"suc-desc": "在嵌入的页面链接中创建可悬停内容摘要",
+	"suc-tooltip-title": "摘要卡",
+	"suc-tooltip-error": "错误",
+	"prefs-suc-options": "摘要卡选项",
+	"suc-tooltip-disabled": "不要在内容链接上显示摘要卡"
+}

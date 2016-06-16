@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rachmat.Wahidi"
+		]
+	},
+	"suc-desc": "Membuat ringkasan isi melayang pada pranala halaman yang dibenamkan",
+	"suc-tooltip-title": "Kartu Ringkasan",
+	"suc-tooltip-error": "Kesalahan",
+	"prefs-suc-options": "Opsi Kartu Ringkasan",
+	"suc-tooltip-disabled": "Jangan tampilkan Kartu Ringkasan pada pranala isi"
+}

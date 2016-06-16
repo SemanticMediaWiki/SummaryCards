@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Rubentl134"
+		]
+	},
+	"suc-desc": "Crea resúmenes de contenido desplegables en enlaces de páginas embebidos",
+	"suc-tooltip-title": "Tarjeta de resumen",
+	"suc-tooltip-error": "Error",
+	"prefs-suc-options": "Opciones de tarjetas de resumen",
+	"suc-tooltip-disabled": "No mostrar tarjetas de resumen en enlaces de contenido"
+}
