@@ -7,5 +7,6 @@
 	"suc-desc": "Crea resumos de contido despregables en ligazóns de páxinas embebidos",
 	"suc-tooltip-title": "Tarxeta de resumo",
 	"suc-tooltip-error": "Erro",
-	"prefs-suc-options": "Opcións de tarxetas de resumo"
+	"prefs-suc-options": "Opcións de tarxetas de resumo",
+	"suc-tooltip-disabled": "Non amosar as Tarxetas de resumo en ligazóns de contido"
 }
