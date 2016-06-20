@@ -44,8 +44,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testInit( $name ) {
 
-		$instance = new Options();
-		$instance->init();
+		$instance = Options::newFromGlobals();
 
 		$this->assertTrue(
 			$instance->has( $name )

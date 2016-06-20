@@ -386,8 +386,8 @@
 		new onoi.util(),
 		new onoi.blobstore(
 			'suc' +  ':' +
-			mw.config.get( 'wgUserLanguage' ) + ':' +
-			mw.config.get( 'wgCookiePrefix' )
+			mw.config.get( 'wgCookiePrefix' ) + ':' +
+			mw.config.get( 'wgUserLanguage' )
 		)
 	);
 

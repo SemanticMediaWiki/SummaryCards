@@ -49,11 +49,8 @@ class ApiCacheableTemplateParse extends ApiBase {
 	 */
 	public function execute() {
 
-		if ( $this->backendCache === null ) {
-			$this->backendCache = BackendCache::getInstance();
-		}
-
 		$data = $this->getDataFrom(
+			BackendCache::getInstance( $this->backendCache ),
 			$this->extractRequestParams()
 		);
 
@@ -64,6 +61,11 @@ class ApiCacheableTemplateParse extends ApiBase {
  		);
 	}
 
+	/**
+	 * ApiBase::getAllowedParams
+	 *
+	 * @since 1.0
+	 */
 	public function getAllowedParams() {
 		return array(
 			'text'         => array( ApiBase::PARAM_TYPE => 'string' ),
@@ -100,7 +102,7 @@ class ApiCacheableTemplateParse extends ApiBase {
 		);
 	}
 
-	private function getDataFrom( $params ) {
+	private function getDataFrom( BackendCache $backendCache, array $params ) {
 
 		$start = microtime( true );
 		$untouchedTemplate = false;
@@ -114,12 +116,12 @@ class ApiCacheableTemplateParse extends ApiBase {
 			return $data;
 		}
 
-		$blobStore = $this->backendCache->getBlobStore();
+		$blobStore = $backendCache->getBlobStore();
 
 		list( $templateKey, $templateTouched ) = $this->getTemplateFrom( $params );
 
-		$title = $this->backendCache->getTargetFrom( $params['title'] );
-		$hash = $this->backendCache->getHashFrom( $title );
+		$title = $backendCache->getTargetFrom( $params['title'] );
+		$hash = $backendCache->getHashFrom( $title );
 
 		$container = $blobStore->read( $hash );
 

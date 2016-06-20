@@ -8,6 +8,7 @@ use Onoi\BlobStore\BlobStore;
 use ApiParse;
 use ApiBase;
 use Title;
+use Revision;
 
 /**
  * @license GNU GPL v2+
@@ -48,16 +49,21 @@ class BackendCache {
 	/**
 	 * @since 1.0
 	 *
+	 * @param BackendCache|null $instance
+	 *
 	 * @return BackendCache
 	 */
-	public static function getInstance() {
+	public static function getInstance( BackendCache $instance = null ) {
+
+		if ( $instance !== null ) {
+			return $instance;
+		}
 
 		if ( self::$instance !== null ) {
 			return self::$instance;
 		}
 
-		$options = new Options();
-		$options->init();
+		$options = Options::newFromGlobals();
 
 		$cache = OnoiCacheFactory::getInstance()->newMediaWikiCache(
 			ObjectCache::getInstance( $options->get( 'backendParserCacheType' ) )
@@ -125,7 +131,7 @@ class BackendCache {
 		}
 
 		# Get the article text
-		$rev = \Revision::newFromTitle( $title, false, \Revision::READ_LATEST );
+		$rev = Revision::newFromTitle( $title, false, Revision::READ_LATEST );
 
 		if ( !is_object( $rev ) ) {
 			return $title;

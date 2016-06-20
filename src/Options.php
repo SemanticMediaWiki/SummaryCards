@@ -19,6 +19,8 @@ class Options {
 
 	/**
 	 * @since 1.0
+	 *
+	 * @param array $options
 	 */
 	public function __construct( array $options = array() ) {
 		$this->options = $options;
@@ -26,8 +28,10 @@ class Options {
 
 	/**
 	 * @since 1.0
+	 *
+	 * @return self
 	 */
-	public function init() {
+	public static function newFromGlobals() {
 		$GLOBALS['sucgCachePrefix'] = $GLOBALS['wgCachePrefix'] === false ? wfWikiID() : $GLOBALS['wgCachePrefix'];
 
 		$configuration = array(
@@ -39,9 +43,7 @@ class Options {
 			'backendParserCacheType'       => $GLOBALS['sucgBackendParserCacheType']
 		);
 
-		foreach ( $configuration as $key => $value ) {
-			$this->set( $key, $value );
-		}
+		return new self( $configuration );
 	}
 
 	/**

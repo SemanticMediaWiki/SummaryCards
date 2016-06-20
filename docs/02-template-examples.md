@@ -1,11 +1,11 @@
 ## Usage
 
-It is recommended that templates responsible for creating summaries make use of
-`{{int: ... }}` parser to allow for content to be displayed in an appropriate
+It is recommended that templates assigned for creating summaries make use of
+`{{int: ... }}` parser to allow content to be displayable in an appropriate
 user language.
 
-SUC will provide the following parameters for convenience so templates can be
-build more effectively.
+SUC will provide the following parameters for convenience in order for templates
+to be build more efficiently.
 
 - `{{{subject}}}`
 - `{{{namespace}}}`
@@ -17,8 +17,8 @@ build more effectively.
 
 ## Examples
 
-The following examples contain simple template snippets that can be used in connection
-with the SummaryCards extension and will in most cases require [Semantic MediaWiki][smw]
+The following examples contain content snippets that can be used in connection
+with this extension but will most likely require [Semantic MediaWiki][smw]
 to work as described.
 
 ### Files and images

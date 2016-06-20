@@ -11,8 +11,7 @@ Summary Cards (a.k.a SUC) is a simple extension for displaying content summaries
 hovered links.
 
 The content of a Summary Card on a hovered link is created by a template that is
-assigned to the namespace the link belongs and requested via [Ajax][ajax] to improve
-display responsiveness.
+assigned to the namespace the link belongs and requested via [Ajax][ajax].
 
 The extension does not require [Semantic MediaWiki][smw] but it is highly recommended to
 use them together in order for summaries to generate individual content (e.g. property
@@ -45,59 +44,10 @@ an entry in MediaWiki's `composer.json`.
 
 ![image](https://cloud.githubusercontent.com/assets/1245473/15775040/0033ad4c-2980-11e6-9514-007afc0ed630.png)
 
-Logged-in users can individually decide whether or not to display a summary card while
-the setting `$GLOBALS['sucgEnabledForAnonUser']` is provided to disable Summary Cards
-for anon users globally.
+### Documentation
 
-The setting for a user can be found under `Preference -> Appearance`.
-
-### Templates and content summaries
-
-Summaries are enabled on a per namespace basis by assigning a template that specifies
-the expected content.
-
-```
-$GLOBALS['sucgEnabledNamespaceWithTemplate'] = array(
-	NS_MAIN         => 'Hovercard',
-	NS_HELP         => 'Hovercard',
-	NS_FILE         => 'Hovercard-File',
-	NS_CATEGORY     => 'Hovercard-Category',
-	SMW_NS_PROPERTY => 'Hovercard-Property',
-);
-```
-
-If the setting includes reference to `SMW_NS_PROPERTY` then it should be added after
-the `enableSemantics` in order for namespaces to be registered appropriately.
-
-The [template][temp] document contains some simple examples on how to create dynamic
-content summaries.
-
-### Links
-
-Summary Cards uses some ruleset to match only legitimate links (external as well as
-interwiki links are generally disabled) for preparing a summary display, yet it
-can happen that the set has missed a certain link type and if possible needs adjustment.
-
-Summary cards on the `SMW_NS_PROPERTY` namespace are only displayed when no
-other highlighter (e.g. from SMW core) is available to avoid competing tooltips.
-
-### Cache
-
-To avoid unnecessary API requests, a client can use the local cache with
-`$GLOBALS['sucgTooltipRequestCacheLifetime']` defining the during of how long
-data are to be kept before a new request is made (is set to `30 min` by
-default, `false` to disable it).
-
-While client-side browser caching may help to avoid repeated requests, a
-similar request from a different browser would still cause a content parse.
-To leverage on existing summaries that have been created by other users,
-`$GLOBALS['sucgBackendParserCacheType']` can be set to create cacheable
-server-side content without deploying a challenging infrastructure (using
-squid or varnish).
-
-If a subject (which equals the hovered link) and/or its assigned template are
-altered then related cache items are evicted in order for content to be
-updated (content that is locally cached are exempted from the update).
+The following [document](docs/01-content-summaries.md) contains a detailed description on available settings
+and how to create adaptable content summaries.
 
 ## Contribution and support
 
