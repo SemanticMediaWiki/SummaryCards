@@ -36,7 +36,7 @@
 	},
 	"autoload": {
 		"files" : [
-			"src/DefaultSettings.php",
+			"DefaultSettings.php",
 			"SummaryCards.php"
 		],
 		"psr-4": {

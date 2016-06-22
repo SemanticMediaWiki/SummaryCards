@@ -385,7 +385,7 @@
 		new mw.Api(),
 		new onoi.util(),
 		new onoi.blobstore(
-			'suc' +  ':' +
+			'summary-cards' +  ':' +
 			mw.config.get( 'wgCookiePrefix' ) + ':' +
 			mw.config.get( 'wgUserLanguage' )
 		)

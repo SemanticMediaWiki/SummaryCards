@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Default settings only to be used by the extension itself, please modify parameters
- * using the LocalSettings file.
+ * DO NOT EDIT!
+ *
+ * The following default settings are to be used by the extension itself,
+ * please modify settings in the LocalSettings file.
+ *
+ * @codeCoverageIgnore
  */
-
 if ( !defined( 'MEDIAWIKI' ) ) {
-	echo "This file is part of MediaWiki and is not a valid entry point\n";
-	die( 1 );
+	die( 'This file is part of the SummaryCards extension, it is not a valid entry point.' );
 }
 
 /**

@@ -21,8 +21,6 @@ if ( defined( 'SUC_VERSION' ) ) {
 	return 1;
 }
 
-define( 'SUC_VERSION', '1.0.0-alpha' );
-
 SummaryCards::initExtension();
 
 $GLOBALS['wgExtensionFunctions'][] = function() {
@@ -38,6 +36,11 @@ class SummaryCards {
 	 * @since 1.0
 	 */
 	public static function initExtension() {
+
+		// Load DefaultSettings
+		require_once __DIR__ . '/DefaultSettings.php';
+
+		define( 'SUC_VERSION', '1.0.0-alpha' );
 
 		// Register the extension
 		$GLOBALS['wgExtensionCredits']['others'][ ] = array(
