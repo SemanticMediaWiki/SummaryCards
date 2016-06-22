@@ -32,7 +32,7 @@ class I18nJsonFileIntegrityTest extends \PHPUnit_Framework_TestCase {
 		$provider = array();
 
 		$files = $this->findFilesForExtension(
-			$GLOBALS['wgMessagesDirs']['summary-cards'],
+			$GLOBALS['wgMessagesDirs']['SummaryCards'],
 			'json'
 		);
 

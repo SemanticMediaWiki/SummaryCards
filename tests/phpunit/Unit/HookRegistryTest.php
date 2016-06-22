@@ -18,12 +18,12 @@ class HookRegistryTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanConstruct() {
 
-		$options = $this->getMockBuilder( '\SUC\Options' )
+		$options = $this->getMockBuilder( Options::class )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$this->assertInstanceOf(
-			'\SUC\HookRegistry',
+			HookRegistry::class,
 			new HookRegistry( $options )
 		);
 	}
@@ -144,7 +144,7 @@ class HookRegistryTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertThatHookIsExcutable(
 			$instance->getHandlerFor( $hook ),
-			array(&$vars )
+			array( &$vars )
 		);
 
 		$this->assertArrayHasKey(

@@ -36,18 +36,6 @@ class HookRegistry {
 	}
 
 	/**
-	 * @note Usually only used during unit/integration testing
-	 *
-	 * @since  1.0
-	 *
-	 * @param string $key
-	 * @param mixed $value
-	 */
-	public function setOption( $key, $value ) {
-		$this->options->set( $key, $value );
-	}
-
-	/**
 	 * @since  1.0
 	 *
 	 * @param string $name

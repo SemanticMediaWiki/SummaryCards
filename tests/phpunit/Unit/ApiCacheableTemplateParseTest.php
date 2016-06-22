@@ -3,11 +3,15 @@
 namespace SUC\Tests;
 
 use SUC\ApiCacheableTemplateParse;
+use SUC\BackendCache;
+use Onoi\BlobStore\BlobStore;
+use Onoi\BlobStore\Container;
 use ApiMain;
 use ApiResult;
 use FauxRequest;
 use RequestContext;
 use WebRequest;
+use Title;
 
 /**
  * @covers \SUC\ApiCacheableTemplateParse
@@ -68,6 +72,53 @@ class ApiCacheableTemplateParseTest extends \PHPUnit_Framework_TestCase {
 				'_type'   => 'assoc'
 			),
 			$instance->getResult()->getResultData()
+		);
+	}
+
+	public function testExecuteOnNonCachedParseRequest() {
+
+		$container = $this->getMockBuilder( Container::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$blobStore = $this->getMockBuilder( BlobStore::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$blobStore->expects( $this->atLeastOnce() )
+			->method( 'read' )
+			->will( $this->returnValue( $container ) );
+
+		$backendCache = $this->getMockBuilder( BackendCache::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$backendCache->expects( $this->any() )
+			->method( 'getBlobStore' )
+			->will( $this->returnValue( $blobStore ) );
+
+		$backendCache->expects( $this->atLeastOnce() )
+			->method( 'getTargetFrom' )
+			->will( $this->returnValue( Title::newFromText( __METHOD__ ) ) );
+
+		$params = array(
+			'text'  => 'Some text',
+			'title' => 'Foo'
+		);
+
+		$instance = new ApiCacheableTemplateParse(
+			$this->newApiMain( $params ),
+			'ctparse'
+		);
+
+		$instance->setBackendCache( $backendCache );
+		$instance->execute();
+
+		$result = $instance->getResult()->getResultData();
+
+		$this->assertInternalType(
+			'float',
+			$result['ctparse']['time']['parse']
 		);
 	}
 

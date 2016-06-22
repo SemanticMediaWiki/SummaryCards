@@ -1,7 +1,7 @@
 {
 	"name": "mediawiki/summary-cards",
 	"type": "mediawiki-extension",
-	"description": "Display content summaries with the help of templates and #ask queries as hovercards.",
+	"description": "Display content summaries on hovered links with the help of templates and #ask queries.",
 	"keywords": [
 		"semantic mediawiki",
 		"wiki",
@@ -36,6 +36,7 @@
 	},
 	"autoload": {
 		"files" : [
+			"DefaultSettings.php",
 			"SummaryCards.php"
 		],
 		"psr-4": {
