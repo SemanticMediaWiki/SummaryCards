@@ -245,7 +245,7 @@
 	 * @param {string} subject
 	 * @param {Object} QTip
 	 */
-	suc.prototype.setContentsTo = function( subject, QTip ) {
+	suc.prototype.getContentsFor = function( subject, QTip ) {
 
 		subject = subject.replace( "-20", " " ).replace(/_/g, " " );
 
@@ -267,9 +267,11 @@
 
 		// Async process
 		self.blobstore.get( hash, function( value ) {
-			if ( self.ttl == 0 || value === null ) {
+			if ( self.ttl == 0 || value === null || value === '' ) {
+				console.log( 'blobstore.get from parse' );
 				self.parse( hash, template, text, subject, QTip );
 			} else {
+				console.log( 'blobstore.get from cache' );
 				QTip.set( 'content.title', mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-browser"></span>' );
 				QTip.set( 'content.text', value );
 			}
@@ -288,7 +290,7 @@
 
 		var self = this;
 
-		self.mwApi.post( {
+		self.mwApi.get( {
 			action: "ctparse",
 			title: subject,
 			text: text,
@@ -346,9 +348,10 @@
 
 		context.qtip( {
 			content: {
-				title :  mw.msg( 'suc-tooltip-title' ),
+				title : mw.msg( 'suc-tooltip-title' ),
 				text  : function( event, QTip ) {
-					self.setContentsTo( link, QTip );
+					console.log( 'before getContentsFor on ' + link );
+					self.getContentsFor( link, QTip );
 
 					// Show a loading image while waiting on the request result
 					return self.util.getLoadingImg( 'suc-tooltip', 'dots' );
@@ -360,10 +363,10 @@
 				at: 'bottom middle'
 			},
 			show: {
-				delay: 500,
-				when: {
-					event: 'focus'
-				}
+				delay: 800
+			//	when: {
+			//		event: 'focus'
+			//	}
 			},
 			hide    : {
 				fixed: true,
@@ -372,7 +375,7 @@
 			},
 			style   : {
 				'default': false,
-				classes: $( this ).attr( 'class' ) + ' qtip-shadow qtip-bootstrap suc-tooltip',
+				classes: 'summary-cards qtip-shadow qtip-bootstrap suc-tooltip',
 				def    : false
 			}
 		} );

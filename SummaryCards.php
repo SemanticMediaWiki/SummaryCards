@@ -44,7 +44,7 @@ class SummaryCards {
 
 		// Register the extension
 		$GLOBALS['wgExtensionCredits']['others'][ ] = array(
-			'path'           => __DIR__,
+			'path'           => __FILE__,
 			'name'           => 'Summary Cards',
 			'author'         => array(
 				'James Hong Kong'
