@@ -6,8 +6,8 @@
 		]
 	},
 	"suc-desc": "첨부한 페이지 링크에 요약한 내용을 띄워보세요.",
-	"suc-tooltip-title": "요약 카드�",
-	"suc-tooltip-error": "오류�",
+	"suc-tooltip-title": "요약 카드",
+	"suc-tooltip-error": "오류",
 	"prefs-suc-options": "요약 카드 선택지",
 	"suc-tooltip-disabled": "콘텐츠 링크에 대한 요약 카드를 보이지 않음"
 }
