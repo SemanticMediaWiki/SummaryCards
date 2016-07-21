@@ -137,7 +137,7 @@ class HookRegistry {
 				$namespacesByContentLanguage[$contentLanguage->getNsText( $ns )] = $name;
 			}
 
-			$vars['ext.suc.config'] = array(
+			$vars['ext.summaryCards.config'] = array(
 				'tooltipRequestCacheTTL'          => $options->get( 'tooltipRequestCacheTTL' ),
 				'cachePrefix'                     => $options->get( 'cachePrefix' ),
 				'enabledForAnonUsers'             => $options->get( 'enabledForAnonUsers' ),

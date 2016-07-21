@@ -148,7 +148,7 @@ class HookRegistryTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		$this->assertArrayHasKey(
-			'ext.suc.config',
+			'ext.summaryCards.config',
 			$vars
 		);
 	}

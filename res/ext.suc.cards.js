@@ -24,7 +24,7 @@
 	 *
 	 * @return {this}
 	 */
-	var suc = function ( mwApi, util, blobstore ) {
+	var summaryCards = function ( mwApi, util, blobstore ) {
 
 		this.VERSION = "1.0.0";
 
@@ -35,7 +35,7 @@
 		this.userLanguage = mw.config.get( 'wgUserLanguage' );
 		this.pageContentLanguage = mw.config.get( 'wgPageContentLanguage' );
 
-		this.config = mw.config.get( 'ext.suc.config' );
+		this.config = mw.config.get( 'ext.summaryCards.config' );
 		this.articlePath = mw.config.get( 'wgArticlePath' ).replace( '$1', '' );
 
 		this.enabledNamespaceWithTemplate = this.config.enabledNamespaceWithTemplate;
@@ -49,16 +49,6 @@
 
 		return this;
 	};
-
-	/**
-	 * @since  1.0
-	 * @method
-	 */
-	suc.prototype.updateConfig = function() {
-		this.userLanguage = mw.config.get( 'wgUserLanguage' );
-		this.pageContentLanguage = mw.config.get( 'wgPageContentLanguage' );
-		this.config = mw.config.get( 'ext.suc.config' );
-	}
 
 	/**
 	 * Whether a link is legitimate for displaying a summary card or not.
@@ -75,7 +65,7 @@
 	 *
 	 * @return {boolean}
 	 */
-	suc.prototype.isLegitimiateLink = function( context, link ) {
+	summaryCards.prototype.isLegitimiateLink = function( context, link ) {
 
 		var self = this,
 			cls = context.attr( 'class' ),
@@ -167,7 +157,7 @@
 	 *
 	 * @return {boolean}
 	 */
-	suc.prototype.isEnabled = function() {
+	summaryCards.prototype.isEnabled = function() {
 
 		if ( mw.config.get( 'wgUserName' ) === null ) {
 			return this.config.enabledForAnonUsers;
@@ -184,7 +174,7 @@
 	 *
 	 * @return {string}
 	 */
-	suc.prototype.getNormalizedLink = function( href ) {
+	summaryCards.prototype.getNormalizedLink = function( href ) {
 
 		if ( href === undefined ) {
 			return '';
@@ -213,7 +203,7 @@
 	 *
 	 * @return {string}
 	 */
-	suc.prototype.getNamespaceFrom = function( subject ) {
+	summaryCards.prototype.getNamespaceFrom = function( subject ) {
 		var namespace = subject.split( ( subject.indexOf( '%3A' ) >= 0 ? '%3A': ':' ) );
 		namespace = namespace.length > 1 ? namespace[0] : '';
 
@@ -229,7 +219,7 @@
 	 *
 	 * @return {string}
 	 */
-	suc.prototype.getTemplateNameFrom = function( namespace ) {
+	summaryCards.prototype.getTemplateNameFrom = function( namespace ) {
 
 		if ( this.enabledNamespaceWithTemplate.hasOwnProperty( namespace ) ) {
 			return this.enabledNamespaceWithTemplate[namespace]
@@ -245,7 +235,7 @@
 	 * @param {string} subject
 	 * @param {Object} QTip
 	 */
-	suc.prototype.getContentsFor = function( subject, QTip ) {
+	summaryCards.prototype.getContentsFor = function( subject, QTip ) {
 
 		subject = subject.replace( "-20", " " ).replace(/_/g, " " );
 
@@ -268,12 +258,17 @@
 		// Async process
 		self.blobstore.get( hash, function( value ) {
 			if ( self.ttl == 0 || value === null || value === '' ) {
-				console.log( 'blobstore.get from parse' );
-				self.parse( hash, template, text, subject, QTip );
+				self.doApiRequest( hash, template, text, subject, QTip );
 			} else {
-				console.log( 'blobstore.get from cache' );
-				QTip.set( 'content.title', mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-browser"></span>' );
-				QTip.set( 'content.text', value );
+				QTip.set(
+					'content.title',
+					mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-browser"></span>'
+				);
+
+				QTip.set(
+					'content.text',
+					value
+				);
 			}
 		} );
 	}
@@ -286,7 +281,7 @@
 	 * @param {string} template
 	 * @param {Object} QTip
 	 */
-	suc.prototype.parse = function( hash, template, text, subject, QTip ) {
+	summaryCards.prototype.doApiRequest = function( hash, template, text, subject, QTip ) {
 
 		var self = this;
 
@@ -297,8 +292,6 @@
 			template: template,
 			userlanguage: self.userLanguage
 		} ).done( function( data ) {
-
-			console.log( data.ctparse.time );
 
 			// Remove any comments retrieved from the API parse process
 			// var text = data.ctparse.text['*'].replace(/<!--[\S\s]*?-->/gm, '' );
@@ -333,24 +326,14 @@
 	 * @param {Object} context
 	 * @param {string} link
 	 */
-	suc.prototype.tooltip = function( context, link ) {
+	summaryCards.prototype.createTooltip = function( context, link ) {
 
 		var self = this;
-
-		/*
-		// Double check, there is no better way to avoid double
-		// tooltips due to async load of modules
-		var parentClass = context.parent().attr( 'class' ),
-			grandparentClass = context.parent().parent().attr( 'class' );
-
-		console.log( parentClass, grandparentClass );
-		*/
 
 		context.qtip( {
 			content: {
 				title : mw.msg( 'suc-tooltip-title' ),
 				text  : function( event, QTip ) {
-					console.log( 'before getContentsFor on ' + link );
 					self.getContentsFor( link, QTip );
 
 					// Show a loading image while waiting on the request result
@@ -382,38 +365,72 @@
 	};
 
 	/**
-	 * Instance
+	 * @since  1.0
+	 * @method
+	 *
+	 * @param {Object} context
 	 */
-	var summaryCards = new suc(
-		new mw.Api(),
-		new onoi.util(),
-		new onoi.blobstore(
-			'summary-cards' +  ':' +
-			mw.config.get( 'wgCookiePrefix' ) + ':' +
-			mw.config.get( 'wgUserLanguage' )
-		)
-	);
+	summaryCards.prototype.createCard = function( context ) {
+
+		var link = this.getNormalizedLink( context.attr( "href" ) );
+
+		if ( !this.isLegitimiateLink( context, link ) ) {
+			return;
+		};
+
+		this.createTooltip( context, link );
+	};
+
+	/**
+	 * @since  1.0
+	 * @method
+	 *
+	 * @param {Object} context
+	 */
+	summaryCards.prototype.initCardsFromContext = function( context ) {
+
+		var self = this;
+
+		context.find( 'a' ).each( function() {
+			self.createCard( $( this ) );
+		} );
+	};
+
+	/**
+	 * Factory
+	 */
+	var Factory = {
+		newSummaryCards: function() {
+			var instance;
+
+			instance = new summaryCards(
+				new mw.Api(),
+				new onoi.util(),
+				new onoi.blobstore(
+					'summary-cards' +  ':' +
+					mw.config.get( 'wgCookiePrefix' ) + ':' +
+					mw.config.get( 'wgUserLanguage' )
+				)
+			);
+
+			return instance;
+		}
+	}
 
 	$( document ).ready( function() {
 
-		if ( !summaryCards.isEnabled() ) {
+		var instance = Factory.newSummaryCards();
+
+		if ( !instance.isEnabled() ) {
 			return;
 		};
 
 		$( '#bodyContent a' ).each( function() {
-
-			var context = $( this ),
-				link = summaryCards.getNormalizedLink( context.attr( "href" ) );
-
-			if ( !summaryCards.isLegitimiateLink( context, link ) ) {
-				return;
-			};
-
-			//summaryCards.updateConfig();
-			summaryCards.tooltip( context, link );
+			instance.createCard( $( this ) );
 		} );
-
-		console.log( summaryCards.linksCount );
 	} );
+
+// Assign namespace
+window.summaryCards = Factory;
 
 }( jQuery, mediaWiki, onoi ) );
