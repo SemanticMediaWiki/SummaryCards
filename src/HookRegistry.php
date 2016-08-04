@@ -3,6 +3,7 @@
 namespace SUC;
 
 use Hooks;
+use MWNamespace;
 
 /**
  * @license GNU GPL v2+
@@ -99,8 +100,8 @@ class HookRegistry {
 		 *
 		 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NewRevisionFromEditComplete
 		 */
-		$this->handlers['NewRevisionFromEditComplete'] = function ( $wikiPage, $revision, $baseId, $user ) {
-			return BackendCache::getInstance()->invalidateCache( $wikiPage->getTitle() );
+		$this->handlers['NewRevisionFromEditComplete'] = function ( $wikiPage, $revision, $baseId, $user ) use( $options ) {
+			return CacheHelper::newFromOptions( $options )->invalidateCache( $wikiPage->getTitle() );
 		};
 
 		/**
@@ -133,7 +134,7 @@ class HookRegistry {
 
 			// Get literals to match and split when comparing href's during the
 			// JS parse process
-			foreach ( \MWNamespace::getCanonicalNamespaces() as $ns => $name ) {
+			foreach ( MWNamespace::getCanonicalNamespaces() as $ns => $name ) {
 				$namespacesByContentLanguage[$contentLanguage->getNsText( $ns )] = $name;
 			}
 

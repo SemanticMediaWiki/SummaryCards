@@ -16,14 +16,9 @@ use Revision;
  *
  * @author mwjames
  */
-class BackendCache {
+class CacheHelper {
 
 	const VERSION = '0.1';
-
-	/**
-	 * @var BackendCache
-	 */
-	private static $instance = null;
 
 	/**
 	 * @var BlobStore
@@ -49,28 +44,18 @@ class BackendCache {
 	/**
 	 * @since 1.0
 	 *
-	 * @param BackendCache|null $instance
+	 * @param Options $options
 	 *
-	 * @return BackendCache
+	 * @return CacheHelper
 	 */
-	public static function getInstance( BackendCache $instance = null ) {
-
-		if ( $instance !== null ) {
-			return $instance;
-		}
-
-		if ( self::$instance !== null ) {
-			return self::$instance;
-		}
-
-		$options = Options::newFromGlobals();
+	public static function newFromOptions( Options $options ) {
 
 		$cache = OnoiCacheFactory::getInstance()->newMediaWikiCache(
 			ObjectCache::getInstance( $options->get( 'backendParserCacheType' ) )
 		);
 
 		$blobStore = new BlobStore(
-			'suc:store',
+			'summarycards:store',
 			$cache
 		);
 
@@ -82,14 +67,7 @@ class BackendCache {
 			$options->get( 'backendParserCacheLifetime' )
 		);
 
-		return self::$instance = new self( $blobStore, $options );
-	}
-
-	/**
-	 * @since 1.0
-	 */
-	public static function clear() {
-		self::$instance = null;
+		return new self( $blobStore, $options );
 	}
 
 	/**
@@ -122,7 +100,7 @@ class BackendCache {
 	 *
 	 * @return Title|null
 	 */
-	public function getTargetFrom( $title ) {
+	public function newTitleFromText( $title ) {
 
 		$title = Title::newFromText( $title );
 

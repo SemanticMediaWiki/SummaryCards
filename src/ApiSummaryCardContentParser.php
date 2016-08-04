@@ -15,7 +15,7 @@ use Title;
  * data from a persistent cache layer to avoid unnecessary content parsing.
  *
  * On the event of NewRevisionFromEditComplete a cached item will be evicted if
- * it matches the BackendCache::getHashFrom.
+ * it matches the CacheHelper::getHashFrom.
  *
  * On the event that a template that was used for generating content  was modified
  * then a re-parse of the content is requested the next time instead of a cache
@@ -26,20 +26,36 @@ use Title;
  *
  * @author mwjames
  */
-class ApiCacheableTemplateParse extends ApiBase {
+class ApiSummaryCardContentParser extends ApiBase {
 
 	/**
-	 * @var BackendCache
+	 * @var CacheHelper
 	 */
-	private $backendCache;
+	private $cacheHelper;
 
 	/**
 	 * @since 1.0
 	 *
-	 * @param BackendCache $backendCache
+	 * @param CacheHelper $cacheHelper
 	 */
-	public function setBackendCache( BackendCache $backendCache ) {
-		$this->backendCache = $backendCache;
+	public function setCacheHelper( CacheHelper $cacheHelper ) {
+		$this->cacheHelper = $cacheHelper;
+	}
+
+	/**
+	 * @since 1.0
+	 *
+	 * @return CacheHelper
+	 */
+	public function getCacheHelper() {
+
+		if ( $this->cacheHelper !== null ) {
+			return $this->cacheHelper;
+		}
+
+		return $this->cacheHelper = CacheHelper::newFromOptions(
+			Options::newFromGlobals()
+		);
 	}
 
 	/**
@@ -50,7 +66,6 @@ class ApiCacheableTemplateParse extends ApiBase {
 	public function execute() {
 
 		$data = $this->getDataFrom(
-			BackendCache::getInstance( $this->backendCache ),
 			$this->extractRequestParams()
 		);
 
@@ -98,14 +113,14 @@ class ApiCacheableTemplateParse extends ApiBase {
 	 */
 	public function getDescription() {
 		return array(
-			'Module to parse raw text/templates and store returning results in a backend-cache.'
+			'Module to parse raw text/templates and store returning results using a persistent cache, if available.'
 		);
 	}
 
-	private function getDataFrom( BackendCache $backendCache, array $params ) {
+	private function getDataFrom( array $params ) {
 
 		$start = microtime( true );
-		$untouchedTemplate = false;
+		$isUntouchedTemplate = false;
 
 		$data = array(
 			'text' => '',
@@ -116,29 +131,34 @@ class ApiCacheableTemplateParse extends ApiBase {
 			return $data;
 		}
 
-		$blobStore = $backendCache->getBlobStore();
+		$blobStore = $this->getCacheHelper()->getBlobStore();
 
-		list( $templateKey, $templateTouched ) = $this->getTemplateFrom( $params );
+		list( $templateKey, $templateTouched ) = $this->getTemplateInfoFrom(
+			$params
+		);
 
-		$title = $backendCache->getTargetFrom( $params['title'] );
-		$hash = $backendCache->getHashFrom( $title );
+		$title = $this->getCacheHelper()->newTitleFromText(
+			$params['title']
+		);
+
+		$hash = $this->getCacheHelper()->getHashFrom( $title );
 
 		$container = $blobStore->read( $hash );
 
 		// If the template was touched then re-parse the content to
 		// avoid stalled data
 		if ( $container->has( $templateKey ) ) {
-			$untouchedTemplate = $container->get( $templateKey ) == $templateTouched;
+			$isUntouchedTemplate = $container->get( $templateKey ) == $templateTouched;
 		}
 
 		// Split by lang and fragment into separate containers, while the cache
 		// is stored on a per subject basis allowing all related containers to
 		// be purged at once
-		$key = 'L#' . $params['userlanguage'] . '#' . ( $title !== null ? $title->getFragment() : '' );
+		$contentByLanguageKey = 'L#' . $params['userlanguage'] . '#' . ( $title !== null ? $title->getFragment() : '' );
 
-		if ( $untouchedTemplate && $hash !== '' && $container->has( $key ) ) {
+		if ( $isUntouchedTemplate && $hash !== '' && $container->has( $contentByLanguageKey ) ) {
 			wfDebugLog( 'smw', 'SummaryCards API cache hit on ' . $hash );
-			$data = $container->get( $key );
+			$data = $container->get( $contentByLanguageKey );
 			$data['time']['cached'] = microtime( true ) - $start;
 			return $data;
 		}
@@ -152,7 +172,7 @@ class ApiCacheableTemplateParse extends ApiBase {
 
 		// Only cache when a template is known
 		if ( $hash !== '' && $templateKey !== '' ) {
-			$container->set( $key, $data );
+			$container->set( $contentByLanguageKey, $data );
 			$container->set( $templateKey, $templateTouched );
 			$blobStore->save( $container );
 		}
@@ -160,7 +180,7 @@ class ApiCacheableTemplateParse extends ApiBase {
 		return $data;
 	}
 
-	private function getTemplateFrom( $params ) {
+	private function getTemplateInfoFrom( $params ) {
 
 		$templateKey = '';
 		$templateTouched = 0;

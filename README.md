@@ -7,11 +7,11 @@
 [![Packagist download count](https://poser.pugx.org/mediawiki/summary-cards/d/total.png)](https://packagist.org/packages/mediawiki/summary-cards)
 [![Dependency Status](https://www.versioneye.com/php/mediawiki:summary-cards/badge.png)](https://www.versioneye.com/php/mediawiki:summary-cards)
 
-Summary Cards (a.k.a SUC) is a simple extension for displaying content summaries on
-hovered links.
+Summary Cards (a.k.a SUC) is a simple extension for displaying distinct content
+summaries on hovered links.
 
-The content of a Summary Card on a hovered link is created by a template that is
-assigned to the namespace the link belongs and requested via [Ajax][ajax].
+The content of a Summary Card is created by a template is assigned to the namespace
+of the hovered link and requested via [Ajax][ajax].
 
 The extension does not require [Semantic MediaWiki][smw] but it is highly recommended to
 use them together in order for summaries to generate individual content (e.g. property
@@ -21,7 +21,7 @@ while building a summary.
 ## Requirements
 
 - PHP 5.5 or later
-- MediaWiki 1.24 or later
+- MediaWiki 1.25 or later
 
 ## Installation
 

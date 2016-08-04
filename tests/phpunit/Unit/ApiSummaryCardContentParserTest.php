@@ -2,8 +2,8 @@
 
 namespace SUC\Tests;
 
-use SUC\ApiCacheableTemplateParse;
-use SUC\BackendCache;
+use SUC\ApiSummaryCardContentParser;
+use SUC\CacheHelper;
 use Onoi\BlobStore\BlobStore;
 use Onoi\BlobStore\Container;
 use ApiMain;
@@ -14,7 +14,7 @@ use WebRequest;
 use Title;
 
 /**
- * @covers \SUC\ApiCacheableTemplateParse
+ * @covers \SUC\ApiSummaryCardContentParser
  * @group summary-cards
  *
  * @license GNU GPL v2+
@@ -22,7 +22,7 @@ use Title;
  *
  * @author mwjames
  */
-class ApiCacheableTemplateParseTest extends \PHPUnit_Framework_TestCase {
+class ApiSummaryCardContentParserTest extends \PHPUnit_Framework_TestCase {
 
 	protected function setUp() {
 		if ( version_compare( $GLOBALS['wgVersion'], '1.25', '<' ) ) {
@@ -32,40 +32,40 @@ class ApiCacheableTemplateParseTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanConstruct() {
 
-		$backendCache = $this->getMockBuilder( '\SUC\BackendCache' )
+		$cacheHelper = $this->getMockBuilder( '\SUC\CacheHelper' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$instance = new ApiCacheableTemplateParse(
+		$instance = new ApiSummaryCardContentParser(
 			$this->newApiMain( array() ),
-			'ctparse'
+			'summarycards'
 		);
 
-		$instance->setBackendCache( $backendCache );
+		$instance->setCacheHelper( $cacheHelper );
 
 		$this->assertInstanceOf(
-			'SUC\ApiCacheableTemplateParse',
+			'SUC\ApiSummaryCardContentParser',
 			$instance
 		);
 	}
 
 	public function testExecuteOnEmptyRequest() {
 
-		$backendCache = $this->getMockBuilder( '\SUC\BackendCache' )
+		$cacheHelper = $this->getMockBuilder( '\SUC\CacheHelper' )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$instance = new ApiCacheableTemplateParse(
+		$instance = new ApiSummaryCardContentParser(
 			$this->newApiMain( array() ),
-			'ctparse'
+			'summarycards'
 		);
 
-		$instance->setBackendCache( $backendCache );
+		$instance->setCacheHelper( $cacheHelper );
 		$instance->execute();
 
 		$this->assertEquals(
 			array(
-				'ctparse' => array(
+				'summarycards' => array(
 					'text' => '',
 					'time' => false
 				),
@@ -89,16 +89,16 @@ class ApiCacheableTemplateParseTest extends \PHPUnit_Framework_TestCase {
 			->method( 'read' )
 			->will( $this->returnValue( $container ) );
 
-		$backendCache = $this->getMockBuilder( BackendCache::class )
+		$cacheHelper = $this->getMockBuilder( CacheHelper::class )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$backendCache->expects( $this->any() )
+		$cacheHelper->expects( $this->any() )
 			->method( 'getBlobStore' )
 			->will( $this->returnValue( $blobStore ) );
 
-		$backendCache->expects( $this->atLeastOnce() )
-			->method( 'getTargetFrom' )
+		$cacheHelper->expects( $this->atLeastOnce() )
+			->method( 'newTitleFromText' )
 			->will( $this->returnValue( Title::newFromText( __METHOD__ ) ) );
 
 		$params = array(
@@ -106,19 +106,71 @@ class ApiCacheableTemplateParseTest extends \PHPUnit_Framework_TestCase {
 			'title' => 'Foo'
 		);
 
-		$instance = new ApiCacheableTemplateParse(
+		$instance = new ApiSummaryCardContentParser(
 			$this->newApiMain( $params ),
-			'ctparse'
+			'summarycards'
 		);
 
-		$instance->setBackendCache( $backendCache );
+		$instance->setCacheHelper( $cacheHelper );
 		$instance->execute();
 
 		$result = $instance->getResult()->getResultData();
 
 		$this->assertInternalType(
 			'float',
-			$result['ctparse']['time']['parse']
+			$result['summarycards']['time']['parse']
+		);
+	}
+
+	public function testExecuteOnUntouchedTemplate() {
+
+		$container = $this->getMockBuilder( Container::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$container->expects( $this->atLeastOnce() )
+			->method( 'has' )
+			->will( $this->returnValue( true ) );
+
+		$blobStore = $this->getMockBuilder( BlobStore::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$blobStore->expects( $this->atLeastOnce() )
+			->method( 'read' )
+			->will( $this->returnValue( $container ) );
+
+		$cacheHelper = $this->getMockBuilder( CacheHelper::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$cacheHelper->expects( $this->any() )
+			->method( 'getBlobStore' )
+			->will( $this->returnValue( $blobStore ) );
+
+		$cacheHelper->expects( $this->atLeastOnce() )
+			->method( 'newTitleFromText' )
+			->will( $this->returnValue( Title::newFromText( __METHOD__ ) ) );
+
+		$params = array(
+			'text'  => 'Some text',
+			'title' => 'Foo',
+			'template' => 'Bar'
+		);
+
+		$instance = new ApiSummaryCardContentParser(
+			$this->newApiMain( $params ),
+			'summarycards'
+		);
+
+		$instance->setCacheHelper( $cacheHelper );
+		$instance->execute();
+
+		$result = $instance->getResult()->getResultData();
+
+		$this->assertInternalType(
+			'float',
+			$result['summarycards']['time']['cached']
 		);
 	}
 

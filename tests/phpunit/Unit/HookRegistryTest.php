@@ -36,12 +36,15 @@ class HookRegistryTest extends \PHPUnit_Framework_TestCase {
 			'enabledNamespaceWithTemplate' => array(),
 			'enabledForAnonUsers'          => false,
 			'backendParserCacheLifetime'   => 1,
-			'backendParserCacheType'       => false
+			'backendParserCacheType'       => 'hash'
 		);
 
 		$instance = new HookRegistry(
 			new Options( $configuration )
 		);
+
+		$instance->clear();
+		$instance->register();
 
 		$this->doTestRegisteredBeforePageDisplay( $instance );
 		$this->doTestRegisteredNewRevisionFromEditComplete( $instance );

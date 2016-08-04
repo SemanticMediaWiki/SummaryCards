@@ -1,10 +1,10 @@
 ## Summary Cards
 
-Logged-in users can individually decide whether or not to display a summary card. The
+Each users (those who logged-in) can individually decide whether or not to display a summary card. The
 setting `$GLOBALS['sucgEnabledForAnonUser']` is provided to disable Summary Cards
 for anon users in general.
 
-The setting for a user can be found under `Preference -> Appearance`.
+The user setting can be found under `Preference -> Appearance`.
 
 ![image](https://cloud.githubusercontent.com/assets/1245473/16182795/16d3e012-36aa-11e6-97fd-769500b7905a.png)
 

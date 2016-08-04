@@ -286,7 +286,7 @@
 		var self = this;
 
 		self.mwApi.get( {
-			action: "ctparse",
+			action: "summarycards",
 			title: subject,
 			text: text,
 			template: template,
@@ -295,9 +295,9 @@
 
 			// Remove any comments retrieved from the API parse process
 			// var text = data.ctparse.text['*'].replace(/<!--[\S\s]*?-->/gm, '' );
-			var text = data.ctparse.text.replace(/<!--[\S\s]*?-->/gm, '' );
+			var text = data.summarycards.text.replace(/<!--[\S\s]*?-->/gm, '' );
 
-			if ( data.ctparse.time.cached !== undefined ) {
+			if ( data.summarycards.time.cached !== undefined ) {
 				QTip.set( 'content.title', mw.msg( 'suc-tooltip-title' ) + '<span class="suc-tooltip-cache-indicator suc-tooltip-cache-backend"></span>' );
 			};
 

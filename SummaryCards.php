@@ -12,8 +12,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'This file is part of the SummaryCards extension, it is not a valid entry point.' );
 }
 
-if ( version_compare( $GLOBALS[ 'wgVersion' ], '1.24', 'lt' ) ) {
-	die( '<b>Error:</b> This version of <a href="https://github.com/SemanticMediaWiki/SummaryCards/">SummaryCards</a> is only compatible with MediaWiki 1.24 or above. You need to upgrade MediaWiki first.' );
+if ( version_compare( $GLOBALS[ 'wgVersion' ], '1.25', 'lt' ) ) {
+	die( '<b>Error:</b> This version of <a href="https://github.com/SemanticMediaWiki/SummaryCards/">SummaryCards</a> is only compatible with MediaWiki 1.25 or above. You need to upgrade MediaWiki first.' );
 }
 
 if ( defined( 'SUC_VERSION' ) ) {
@@ -37,9 +37,6 @@ class SummaryCards {
 	 */
 	public static function initExtension() {
 
-		// Load DefaultSettings
-		require_once __DIR__ . '/DefaultSettings.php';
-
 		define( 'SUC_VERSION', '1.0.0-alpha' );
 
 		// Register the extension
@@ -58,10 +55,10 @@ class SummaryCards {
 		// Register message files
 		$GLOBALS['wgMessagesDirs']['SummaryCards'] = __DIR__ . '/i18n';
 
-		$GLOBALS['wgAPIModules']['ctparse'] = '\SUC\ApiCacheableTemplateParse';
+		$GLOBALS['wgAPIModules']['summarycards'] = '\SUC\ApiSummaryCardContentParser';
 
 		$GLOBALS['wgResourceModules']['ext.summary.cards.styles'] = array(
-			'styles'  => 'res/ext.suc.styles.css',
+			'styles'  => 'res/ext.summaryCards.css',
 			'localBasePath' => __DIR__ ,
 			'remoteExtPath' => 'SummaryCards',
 			'position' => 'top',
@@ -89,7 +86,7 @@ class SummaryCards {
 
 		$GLOBALS['wgResourceModules']['ext.summary.cards'] = array(
 			'scripts' => array(
-				'res/ext.suc.cards.js'
+				'res/ext.summaryCards.js'
 			),
 			'localBasePath' => __DIR__ ,
 			'remoteExtPath' => 'SummaryCards',

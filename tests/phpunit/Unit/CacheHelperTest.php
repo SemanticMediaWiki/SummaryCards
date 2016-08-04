@@ -2,13 +2,13 @@
 
 namespace SUC\Tests;
 
-use SUC\BackendCache;
+use SUC\CacheHelper;
 use SUC\Options;
 use Onoi\BlobStore\BlobStore;
 use Title;
 
 /**
- * @covers \SUC\BackendCache
+ * @covers \SUC\CacheHelper
  * @group summary-cards
  *
  * @license GNU GPL v2+
@@ -16,7 +16,7 @@ use Title;
  *
  * @author mwjames
  */
-class BackendCacheTest extends \PHPUnit_Framework_TestCase {
+class CacheHelperTest extends \PHPUnit_Framework_TestCase {
 
 	public function testCanConstruct() {
 
@@ -29,27 +29,13 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$this->assertInstanceOf(
-			BackendCache::class,
-			new BackendCache( $blobStore, $options)
+			CacheHelper::class,
+			new CacheHelper( $blobStore, $options )
 		);
 
 		$this->assertInstanceOf(
-			BackendCache::class,
-			BackendCache::getInstance()
-		);
-
-		BackendCache::clear();
-	}
-
-	public function testConstructFromInject() {
-
-		$backendCache = $this->getMockBuilder( BackendCache::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$this->assertSame(
-			$backendCache,
-			BackendCache::getInstance( $backendCache )
+			CacheHelper::class,
+			CacheHelper::newFromOptions( Options::newFromGlobals() )
 		);
 	}
 
@@ -63,7 +49,7 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 			array( 'enabledNamespaceWithTemplate' => array( NS_CATEGORY => 'Foo' ) )
 		);
 
-		$instance = new BackendCache(
+		$instance = new CacheHelper(
 			$blobStore,
 			$options
 		);
@@ -87,7 +73,7 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 			)
 		);
 
-		$instance = new BackendCache(
+		$instance = new CacheHelper(
 			$blobStore,
 			$options
 		);
@@ -98,7 +84,7 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
-	public function testGetTargetFromForNonFragment() {
+	public function testTitleFromTextForNonFragment() {
 
 		$blobStore = $this->getMockBuilder( BlobStore::class )
 			->disableOriginalConstructor()
@@ -108,14 +94,14 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$instance = new BackendCache(
+		$instance = new CacheHelper(
 			$blobStore,
 			$options
 		);
 
 		$this->assertInstanceOf(
 			Title::class,
-			$instance->getTargetFrom( __METHOD__ )
+			$instance->newTitleFromText( __METHOD__ )
 		);
 	}
 
@@ -132,7 +118,7 @@ class BackendCacheTest extends \PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$instance = new BackendCache(
+		$instance = new CacheHelper(
 			$blobStore,
 			$options
 		);
