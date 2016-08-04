@@ -397,6 +397,24 @@
 	};
 
 	/**
+	 * @since  1.0
+	 * @method
+	 */
+	summaryCards.prototype.registerEventListeners = function() {
+
+		var self = this;
+
+		if ( !self.isEnabled() ) {
+			return;
+		};
+
+		// Listen to the Special:Browse event
+		$ ( document ).on( 'SMW::Browse::ApiParseComplete', function( event, opts ) {
+			 self.initCardsFromContext( opts.context );
+		} );
+	};
+
+	/**
 	 * Factory
 	 */
 	var Factory = {
@@ -417,9 +435,11 @@
 		}
 	}
 
-	$( document ).ready( function() {
+	// Register addEventListeners early on
+	var instance = Factory.newSummaryCards();
+	instance.registerEventListeners();
 
-		var instance = Factory.newSummaryCards();
+	$( document ).ready( function() {
 
 		if ( !instance.isEnabled() ) {
 			return;
