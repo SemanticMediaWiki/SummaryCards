@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Crucifunked",
+			"Xuacu"
+		]
+	},
+	"suc-desc": "Crea resumes de conteníu estenderexables n'enllaces de páxines incrustaos",
+	"suc-tooltip-title": "Tarxeta de resume",
+	"suc-tooltip-error": "Erru",
+	"prefs-suc-options": "Opciones de tarxetes de resume",
+	"suc-tooltip-disabled": "Nun amosar tarxetes de resume n'enllaces de conteníu"
+}
