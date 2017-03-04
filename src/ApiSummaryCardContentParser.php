@@ -213,6 +213,10 @@ class ApiSummaryCardContentParser extends ApiBase {
 		$parserOptions->setInterfaceMessage( true );
 		$parserOptions->setUserLang( $userLanguage );
 
+		// Ensure that no dependency processing occurs with the #ask being
+		// bound to the template output and not to the context page
+		$parserOptions->smwAskNoDependencyTracking = true;
+
 		return $parserOptions;
 	}
 
