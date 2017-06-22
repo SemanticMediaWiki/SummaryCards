@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Okras"
+			"Okras",
+			"Facenapalm"
 		]
 	},
-	"suc-tooltip-error": "Ошибка"
+	"suc-desc": "Создаёт всплывающие подсказки со сводками содержимого на привязанных внутренних ссылках",
+	"suc-tooltip-title": "Карточка сводки",
+	"suc-tooltip-error": "Ошибка",
+	"prefs-suc-options": "Настройки карточек сводок",
+	"suc-tooltip-disabled": "Не показывать карточки сводок на ссылках"
 }

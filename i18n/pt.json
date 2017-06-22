@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vitorvicentevalente"
+			"Vitorvicentevalente",
+			"Hamilton Abreu"
 		]
 	},
+	"suc-desc": "Cria resumos de conteúdo que reagem à passagem do ponteiro do rato, nos links incorporados nas páginas",
+	"suc-tooltip-title": "Cartão de resumo",
 	"suc-tooltip-error": "Erro",
-	"suc-tooltip-disabled": "Não mostrar os Cartões flutuantes em ligações de conteúdo"
+	"prefs-suc-options": "Opções dos cartões de resumo",
+	"suc-tooltip-disabled": "Não mostrar cartões de resumo em links de conteúdo"
 }
