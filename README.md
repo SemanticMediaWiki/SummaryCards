@@ -5,7 +5,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/mediawiki/summary-cards/version.png)](https://packagist.org/packages/mediawiki/summary-cards)
 [![Packagist download count](https://poser.pugx.org/mediawiki/summary-cards/d/total.png)](https://packagist.org/packages/mediawiki/summary-cards)
-[![Dependency Status](https://www.versioneye.com/php/mediawiki:summary-cards/badge.png)](https://www.versioneye.com/php/mediawiki:summary-cards)
 
 Summary Cards (a.k.a SUC) is a simple extension for displaying distinct content
 summaries on hovered links.
@@ -56,7 +55,7 @@ have a look at the contribution guideline.
 
 * [File an issue](https://github.com/SemanticMediaWiki/SummaryCards/issues)
 * [Submit a pull request](https://github.com/SemanticMediaWiki/SummaryCards/pulls)
-* Ask a question on [the mailing list](https://semantic-mediawiki.org/wiki/Mailing_list)
+* Ask a question on [the mailing list](https://www.semantic-mediawiki.org/wiki/Mailing_list)
 * Ask a question on the #semantic-mediawiki IRC channel on Freenode.
 
 ## Tests
