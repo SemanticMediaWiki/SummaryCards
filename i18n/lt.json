@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eitvys200"
+			"Eitvys200",
+			"Manvydasz"
 		]
 	},
-	"suc-tooltip-title": "Santraukos Kortelė",
+	"suc-tooltip-title": "Santraukos kortelė",
 	"suc-tooltip-error": "Klaida",
-	"prefs-suc-options": "Santraukos Kortelės nustatymai",
-	"suc-tooltip-disabled": "Nerodyti Santraukos Kortelių turinio nuorodose"
+	"prefs-suc-options": "Santraukos kortelių nustatymai",
+	"suc-tooltip-disabled": "Nerodyti santraukos kortelių turinio nuorodose"
 }
