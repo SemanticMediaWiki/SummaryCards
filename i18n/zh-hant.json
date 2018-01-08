@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly",
+			"Liuxinyu970226"
+		]
+	},
+	"suc-desc": "在嵌入頁面連結上建立可懸內容摘要",
+	"suc-tooltip-title": "摘要卡",
+	"suc-tooltip-error": "錯誤",
+	"prefs-suc-options": "摘要卡選項",
+	"suc-tooltip-disabled": "在內容連結上不顯示摘要卡"
+}
