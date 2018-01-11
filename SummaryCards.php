@@ -49,7 +49,7 @@ class SummaryCards {
 			'url'            => 'https://github.com/SemanticMediaWiki/SummaryCards/',
 			'descriptionmsg' => 'suc-desc',
 			'version'        => SUC_VERSION,
-			'license-name'   => 'GPL-2.0+',
+			'license-name'   => 'GPL-2.0-or-later',
 		);
 
 		// Register message files
