@@ -1,12 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Obsuser"
+			"Obsuser",
+			"Acamicamacaraca"
 		]
 	},
 	"suc-desc": "Ствара сажетке са ховер садржајем о уграђеним везама страница",
-	"suc-tooltip-title": "Картица за сажетак",
+	"suc-tooltip-title": "Картица за опис",
 	"suc-tooltip-error": "Грешка",
-	"prefs-suc-options": "Опције Картица за сажетак",
-	"suc-tooltip-disabled": "Не приказуј Картице за сажетак на везама садржаја"
+	"prefs-suc-options": "Опције картица за опис",
+	"suc-tooltip-disabled": "Не приказуј картице за опис на везама садржаја"
 }
