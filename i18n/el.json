@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nikosgranturismogt"
+		]
+	},
+	"suc-tooltip-title": "Κάρτα σύνοψης",
+	"suc-tooltip-error": "Σφάλμα",
+	"prefs-suc-options": "Επιλογές κάρτας σύνοψης",
+	"suc-tooltip-disabled": "Μην εμφανίζεις κάρτες σύνοψης σε συνδέσμους περιεχομένου."
+}
