@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"suc-desc": "Oppretter innholdssammendrag på innbygde sidelenker som vises når man holder pekeren over dem.",
+	"suc-tooltip-title": "Sammendragskort",
+	"suc-tooltip-error": "Feil",
+	"prefs-suc-options": "Alternativer for sammendragskort",
+	"suc-tooltip-disabled": "Ikke vis sammendragskort ved innholdslenker"
+}
