@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"BaRaN6161 TURK",
+			"Mirzali"
+		]
+	},
+	"suc-desc": "Katıştırılmış sayfa bağlantılarında paylaşılabilir içerik özetleri oluşturur",
+	"suc-tooltip-title": "Özet Kartı",
+	"suc-tooltip-error": "Hata",
+	"prefs-suc-options": "Özet Kart seçenekleri",
+	"suc-tooltip-disabled": "İçerik Bağlantılarında Özet Kartları gösterme"
+}
