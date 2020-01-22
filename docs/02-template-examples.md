@@ -21,6 +21,14 @@ The following examples contain content snippets that can be used in connection
 with this extension but will most likely require [Semantic MediaWiki][smw]
 to work as described.
 
+### Wiki pages
+
+With the extension [Parser Functions](https://www.mediawiki.org/wiki/Help:Extension:ParserFunctions) enabled, it is possible to transclude part of the content of a wiki page as summary. In this example 250 characters of the page content are shown.
+```
+<includeonly><p><span style="word-wrap: break-word;  word-break: break-word;">{{#sub:{{:{{{subject}}}}}|0|250}}...</span></p>
+</includeonly>
+```
+
 ### Files and images
 
 Image display for when `{{{isFile}}}` returns true (because the subject
