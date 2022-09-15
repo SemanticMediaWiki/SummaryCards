@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Obaid Raza"
+		]
+	},
+	"suc-desc": "ایمبیڈڈ صفحے کے ربط پر معلق مواد کے خلاصے بناتا ہے۔",
+	"suc-tooltip-title": "خلاصہ کارڈ",
+	"suc-tooltip-error": "خطا",
+	"prefs-suc-options": "خلاصہ کارڈ کے اختیارات",
+	"suc-tooltip-disabled": "مواد کے روابط پر خلاصہ کارڈ نہ دکھائیں۔"
+}
