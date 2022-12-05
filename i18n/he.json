@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80",
+			"Guycn2"
+		]
+	},
+	"suc-desc": "יוצר סיכומי תוכן שיכולים לרחף בקישורי דפים מוטמעים",
+	"suc-tooltip-title": "כרטיס סיכום",
+	"suc-tooltip-error": "שגיאה",
+	"prefs-suc-options": "אפשרויות כרטיסי סיכום",
+	"suc-tooltip-disabled": "לא להציג כרטיסי סיכום בקישורי תוכן"
+}
