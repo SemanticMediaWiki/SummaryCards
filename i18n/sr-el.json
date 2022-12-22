@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"suc-desc": "Stvara sažetke sa hover sadržajem o ugrađenim vezama stranica",
+	"suc-tooltip-title": "Kartica za sažetak",
+	"suc-tooltip-error": "Greška",
+	"prefs-suc-options": "Opcije Kartica za opis",
+	"suc-tooltip-disabled": "Ne prikazuj Kartice za sažetak na vezama sadržaja"
+}

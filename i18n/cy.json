@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afalau"
+		]
+	},
+	"suc-desc": "Mae hwn yn creu crynodebau cynnwys sy'n hofran dros ddolenni tudalen wedi'u mewnosod",
+	"suc-tooltip-title": "Cerdyn Crynodeb",
+	"suc-tooltip-error": "Gwall",
+	"prefs-suc-options": "opsiynau Cardiau Crynodeb",
+	"suc-tooltip-disabled": "Peidiwch â dangos Cardiau Crynodeb ar ddolenni cynnwys"
+}
