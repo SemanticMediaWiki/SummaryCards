@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"suc-desc": "Crea summarios de ligamines de pagina incastrate, que appare quando le mouse passa supra illos",
+	"suc-tooltip-title": "Quadro de summario",
+	"suc-tooltip-error": "Error",
+	"prefs-suc-options": "Optiones de quadros de summario",
+	"suc-tooltip-disabled": "Non monstrar quadros de summario sur ligamines de contento"
+}
