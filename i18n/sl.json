@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"suc-desc": "Ustvari lebdeče povzetke vsebine na vdelanih povezavah strani",
+	"suc-tooltip-title": "Kartica s povzetkom",
+	"suc-tooltip-error": "Napaka",
+	"prefs-suc-options": "Možnosti kartic s povzetkom",
+	"suc-tooltip-disabled": "Ne prikaži kartic s povzetkom na povezavah vsebine"
+}
