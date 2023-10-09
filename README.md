@@ -1,5 +1,9 @@
 # Summary Cards
 
+**This extension was never officially released and has not been maintained for a long time.
+Moreover, it is no longer compatible with recent MediaWiki or Semantic MediaWiki releases.
+As a result, it was archived in October 2023.**
+
 [![Build Status](https://secure.travis-ci.org/SemanticMediaWiki/SummaryCards.svg?branch=master)](http://travis-ci.org/SemanticMediaWiki/SummaryCards)
 [![Code Coverage](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SemanticMediaWiki/SummaryCards/?branch=master)
